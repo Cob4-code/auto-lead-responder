@@ -21,8 +21,10 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', async (req, res) => {
         res.sendStatus(200);
 
-                 const body = req.body;
-        console.log('Webhook received:', JSON.stringify(body, null, 2));
+             const body = req.body;
+const platform = body.object;
+if (platform !== 'page' && platform !== 'instagram') return;
+console.log(`[${platform.toUpperCase()}] Webhook received:`, JSON.stringify(body, null, 2));
 
                      const entries = body.entry || [];
             for (const entry of entries) {
